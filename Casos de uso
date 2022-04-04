@@ -1,0 +1,29 @@
+FLUXO PRINCIPAL
+
+O usuário deve receber as boas vindas ao jogo, informando em qual nível deseja jogar, de 3 disponíveis
+
+Uma vez feita a escolha, o jogo se inicia e o usuário deve informar a sua primeira jogada
+
+O tabuleiro é composto de 9 casas, cada uma das quais pode ser ocupada por um X ou O, ou seja, uma jogada do usuário ou do computador (como não há interface gráfica, não existe exatamente a diferenciação de X e O)
+
+A primeira rodada será seguida de uma jogada do computador, em alguma casa não ocupada, depois será solicitado ao usuário informar sua próxima, e assim por diante
+
+O jogo se encerra se um dos jogadores consegue ocupar uma das sequências de casas: 123, 456, 789, 147, 258, 369, 159 ou 357
+
+Também se encerra se todas as casas estiverem ocupadas, mesmo que nenhum dos jogadores ocupe as sequências acima
+
+Encerrado o jogo, o resultado é informado e o usuário é questionado se quer jogar novamente
+
+
+VALIDAÇÕES
+
+O usuário deve informar um nível de 1 a 3, senão será solicitado para digitar novamente
+
+Nas suas jogadas, o usuário deve informar uma casa que ainda não foi utilizada
+
+Deve haver validações para números fora do intervalo permitido (1-9) e para valores não numéricos
+
+
+OUTROS REQUISITOS
+
+Deve haver 3 níveis de jogo diferentes para o computador, que não necessariamente tenham padrões de jogo de dificuldade crescente, mas que devem ter padrões de escolha de jogada distintos uns dos outros
