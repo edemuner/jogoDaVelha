@@ -4,18 +4,36 @@ import java.util.ArrayList;
 
 public class Tabuleiro {
 
-   static void iniciarJogo(int level){
+    static int jogadasFeitas;
+
+    static void iniciarJogo(int level){
+        jogadasFeitas = 0;
         Usuario usuario = new Usuario();
+        if (level == 1) {
+            Computador1 computador = new Computador1();
+        } else if (level == 2){
+            Computador2 computador = new Computador2();
+        } else {
+            Computador3 computador = new Computador3();
+        }
+
         while(true) {
             usuario.jogar();
-            if (verificarVitoria(usuario)) System.out.println("usuário ganhou");
-            // verificar vitória
-            // jogadas ++
+            if (verificarVitoria(usuario)) {
+                System.out.println("usuário ganhou");
+                break;
+            }
+            jogadasFeitas++;
+            if (jogadasFeitas == 9){
+                System.out.println("Empate!");
+                break;
+            }
             // computador.jogar()
             // verificar vitória
             // jogadas ++
         }
     }
+
 
     private static boolean verificarVitoria(Jogador jogador){
         ArrayList<Integer> jogadas = jogador.getJogadas();
