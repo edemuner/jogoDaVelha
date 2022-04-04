@@ -3,6 +3,7 @@ package com.uninter;
 import java.util.ArrayList;
 
 public class Jogador {
+    // VERIFICAR POSSIBILIDADE DE SE USAR SET E NÃO ARRAYLIST
 
     private ArrayList<Integer> jogadas = new ArrayList<>();
 
