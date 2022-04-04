@@ -6,7 +6,9 @@ public class Tabuleiro {
         System.out.println("oi");
 
         Usuario usuario = new Usuario();
-        usuario.addJogada(level);
-        System.out.println(usuario.getJogadas());
+        while(true) {
+            usuario.jogar();
+            System.out.println(usuario.getJogadas());
+        }
     }
 }
