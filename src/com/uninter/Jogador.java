@@ -1,17 +1,17 @@
 package com.uninter;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Jogador {
     // VERIFICAR POSSIBILIDADE DE SE USAR SET E NÃO ARRAYLIST
 
-    private ArrayList<Integer> jogadas = new ArrayList<>();
+    private HashSet<Integer> jogadas = new HashSet<>();
 
     public void addJogada(int casa){
         jogadas.add(casa);
     }
 
-    public ArrayList<Integer> getJogadas() {
+    public HashSet<Integer> getJogadas() {
         return jogadas;
     }
 

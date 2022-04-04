@@ -1,6 +1,7 @@
 package com.uninter;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Tabuleiro {
 
@@ -53,7 +54,8 @@ public class Tabuleiro {
 
 
     private static boolean verificarVitoria(Jogador jogador){
-        ArrayList<Integer> jogadas = jogador.getJogadas();
+        System.out.println(jogador.getJogadas());
+        HashSet<Integer> jogadas = jogador.getJogadas();
         return (jogadas.contains(0) && jogadas.contains(1) && jogadas.contains(2) ||
                 jogadas.contains(3) && jogadas.contains(4) && jogadas.contains(5) ||
                 jogadas.contains(6) && jogadas.contains(7) && jogadas.contains(8) ||
