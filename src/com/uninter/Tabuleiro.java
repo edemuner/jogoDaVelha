@@ -20,29 +20,35 @@ public class Tabuleiro {
                                 new Computador3();
 
         while(true) {
-            int jogadaUsuario = usuario.jogar();
-            if (verificaJogadaFeita(jogadaUsuario)){
-                System.out.println("Essa casa já foi jogada!");
-                continue;
-            }
-            if (verificarVitoria(usuario)) {
-                System.out.println("Usuário ganhou");
-                break;
-            }
-            jogadasFeitas.add(jogadaUsuario);
+
+            if (movimento(usuario) == 0) break;
             if (jogadasFeitas.size() == 9){
                 System.out.println("Empate!");
                 break;
             }
+            if (movimento(computador) == 0) break;
 
-            int jogadapc = computador.jogar();
-            System.out.println("O computador jogou " + jogadapc);
-            if (verificarVitoria(computador)) {
-                System.out.println("Computador ganhou!");
-                break;
-            }
-            // jogadas ++
         }
+    }
+
+    private static int movimento(Jogador jogador){
+
+        boolean jogadaValida = false;
+        while(!jogadaValida){
+            int jogada = jogador.jogar();
+            if (verificaJogadaFeita(jogada)){
+                System.out.println("Essa casa já foi jogada!");
+            } else {
+                jogadaValida = true;
+                jogadasFeitas.add(jogada);
+            }
+        }
+
+        if (verificarVitoria(jogador)) {
+            System.out.println("Usuário ganhou");
+            return 0;
+        }
+        return 1;
     }
 
 
@@ -51,7 +57,7 @@ public class Tabuleiro {
         return (jogadas.contains(0) && jogadas.contains(1) && jogadas.contains(2) ||
                 jogadas.contains(3) && jogadas.contains(4) && jogadas.contains(5) ||
                 jogadas.contains(6) && jogadas.contains(7) && jogadas.contains(8) ||
-                jogadas.contains(0) && jogadas.contains(3) && jogadas.contains(5) ||
+                jogadas.contains(0) && jogadas.contains(3) && jogadas.contains(6) ||
                 jogadas.contains(1) && jogadas.contains(4) && jogadas.contains(7) ||
                 jogadas.contains(2) && jogadas.contains(5) && jogadas.contains(8) ||
                 jogadas.contains(0) && jogadas.contains(4) && jogadas.contains(8) ||

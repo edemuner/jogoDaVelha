@@ -8,7 +8,9 @@ public class Computador1 extends Jogador{
     public int jogar(){
         Random rand = new Random();
 
-        return rand.nextInt(9);
+        int jogada = rand.nextInt(9);
+        System.out.println("O computador jogou " + jogada);
+        return jogada;
 
     }
 }
