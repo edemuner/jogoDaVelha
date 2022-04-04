@@ -7,15 +7,17 @@ public class Tabuleiro {
     static int jogadasFeitas;
 
     static void iniciarJogo(int level){
+
         jogadasFeitas = 0;
+
         Usuario usuario = new Usuario();
-        if (level == 1) {
-            Computador1 computador = new Computador1();
-        } else if (level == 2){
-            Computador2 computador = new Computador2();
-        } else {
-            Computador3 computador = new Computador3();
-        }
+
+        Jogador computador = level == 1 ?
+                                new Computador1() :
+                            level == 2 ?
+                                new Computador2() :
+
+                                new Computador3();
 
         while(true) {
             usuario.jogar();
@@ -28,6 +30,9 @@ public class Tabuleiro {
                 System.out.println("Empate!");
                 break;
             }
+
+            int jogadapc = computador.jogar();
+            System.out.println("O computador jogou " + jogadapc);
             // computador.jogar()
             // verificar vitória
             // jogadas ++
@@ -37,13 +42,13 @@ public class Tabuleiro {
 
     private static boolean verificarVitoria(Jogador jogador){
         ArrayList<Integer> jogadas = jogador.getJogadas();
-        return (jogadas.contains(1) && jogadas.contains(2) && jogadas.contains(3) ||
-                jogadas.contains(4) && jogadas.contains(5) && jogadas.contains(6) ||
-                jogadas.contains(7) && jogadas.contains(8) && jogadas.contains(9) ||
+        return (jogadas.contains(0) && jogadas.contains(1) && jogadas.contains(2) ||
+                jogadas.contains(3) && jogadas.contains(4) && jogadas.contains(5) ||
+                jogadas.contains(6) && jogadas.contains(7) && jogadas.contains(8) ||
+                jogadas.contains(0) && jogadas.contains(3) && jogadas.contains(5) ||
                 jogadas.contains(1) && jogadas.contains(4) && jogadas.contains(7) ||
                 jogadas.contains(2) && jogadas.contains(5) && jogadas.contains(8) ||
-                jogadas.contains(3) && jogadas.contains(6) && jogadas.contains(9) ||
-                jogadas.contains(1) && jogadas.contains(5) && jogadas.contains(9) ||
-                jogadas.contains(3) && jogadas.contains(5) && jogadas.contains(7));
+                jogadas.contains(0) && jogadas.contains(4) && jogadas.contains(8) ||
+                jogadas.contains(2) && jogadas.contains(4) && jogadas.contains(6));
     }
 }

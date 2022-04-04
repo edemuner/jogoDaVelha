@@ -6,13 +6,14 @@ public class Usuario extends Jogador{
 
     Scanner scan = new Scanner(System.in);
 
-    public void jogar(){
+    public int jogar(){
 
         boolean done = false;
+        int jogada = -1;
         while(!done) {
             System.out.println("Digite sua jogada: ");
-            int jogada = Integer.parseInt(scan.nextLine());
-            if (jogada >= 1 && jogada <= 9){
+            jogada = Integer.parseInt(scan.nextLine());
+            if (jogada >= 0 && jogada <= 8){
                 this.addJogada(jogada);
                 done = true;
             } else {
@@ -20,5 +21,6 @@ public class Usuario extends Jogador{
                 System.out.println("----------------------");
             }
         }
+        return jogada;
     }
 }

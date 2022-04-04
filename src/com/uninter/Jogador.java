@@ -14,4 +14,8 @@ public class Jogador {
     public ArrayList<Integer> getJogadas() {
         return jogadas;
     }
+
+    public int jogar(){
+        return -1;
+    }
 }
