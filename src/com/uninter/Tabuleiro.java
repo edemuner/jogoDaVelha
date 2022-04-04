@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public class Tabuleiro {
 
-    static int jogadasFeitas;
+    static ArrayList<Integer> jogadasFeitas = new ArrayList<>();
 
     static void iniciarJogo(int level){
 
-        jogadasFeitas = 0;
+        jogadasFeitas.clear();
 
         Usuario usuario = new Usuario();
 
@@ -20,21 +20,27 @@ public class Tabuleiro {
                                 new Computador3();
 
         while(true) {
-            usuario.jogar();
+            int jogadaUsuario = usuario.jogar();
+            if (verificaJogadaFeita(jogadaUsuario)){
+                System.out.println("Essa casa já foi jogada!");
+                continue;
+            }
             if (verificarVitoria(usuario)) {
-                System.out.println("usuário ganhou");
+                System.out.println("Usuário ganhou");
                 break;
             }
-            jogadasFeitas++;
-            if (jogadasFeitas == 9){
+            jogadasFeitas.add(jogadaUsuario);
+            if (jogadasFeitas.size() == 9){
                 System.out.println("Empate!");
                 break;
             }
 
             int jogadapc = computador.jogar();
             System.out.println("O computador jogou " + jogadapc);
-            // computador.jogar()
-            // verificar vitória
+            if (verificarVitoria(computador)) {
+                System.out.println("Computador ganhou!");
+                break;
+            }
             // jogadas ++
         }
     }
@@ -50,5 +56,9 @@ public class Tabuleiro {
                 jogadas.contains(2) && jogadas.contains(5) && jogadas.contains(8) ||
                 jogadas.contains(0) && jogadas.contains(4) && jogadas.contains(8) ||
                 jogadas.contains(2) && jogadas.contains(4) && jogadas.contains(6));
+    }
+
+    private static boolean verificaJogadaFeita(int jogada){
+        return jogadasFeitas.contains(jogada);
     }
 }
