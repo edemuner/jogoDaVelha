@@ -55,9 +55,14 @@ public class Tabuleiro {
             int jogadaPC;
             while (true){
                 jogadaPC = computador.jogar();
-                if (!verificaJogadaFeita(jogadaPC)) break;
+                if (!verificaJogadaFeita(jogadaPC)) {
+                    jogadasFeitas.add(jogadaPC);
+                    break;
+                }
             }
             System.out.println("Computador jogou " + jogadaPC);
+            System.out.println(computador.getJogadas());
+
             if (verificarVitoria(computador.getJogadas())){
                 System.out.println("Computador venceu!");
                 break;
@@ -66,14 +71,14 @@ public class Tabuleiro {
     }
 
     private static boolean verificarVitoria(HashSet<Integer> jogadas){
-        return (jogadas.contains(0) && jogadas.contains(1) && jogadas.contains(2) ||
-                jogadas.contains(3) && jogadas.contains(4) && jogadas.contains(5) ||
-                jogadas.contains(6) && jogadas.contains(7) && jogadas.contains(8) ||
-                jogadas.contains(0) && jogadas.contains(3) && jogadas.contains(6) ||
-                jogadas.contains(1) && jogadas.contains(4) && jogadas.contains(7) ||
-                jogadas.contains(2) && jogadas.contains(5) && jogadas.contains(8) ||
-                jogadas.contains(0) && jogadas.contains(4) && jogadas.contains(8) ||
-                jogadas.contains(2) && jogadas.contains(4) && jogadas.contains(6));
+        return ((jogadas.contains(0) && jogadas.contains(1) && jogadas.contains(2)) ||
+                (jogadas.contains(3) && jogadas.contains(4) && jogadas.contains(5)) ||
+                (jogadas.contains(6) && jogadas.contains(7) && jogadas.contains(8)) ||
+                (jogadas.contains(0) && jogadas.contains(3) && jogadas.contains(6)) ||
+                (jogadas.contains(1) && jogadas.contains(4) && jogadas.contains(7)) ||
+                (jogadas.contains(2) && jogadas.contains(5) && jogadas.contains(8)) ||
+                (jogadas.contains(0) && jogadas.contains(4) && jogadas.contains(8)) ||
+                (jogadas.contains(2) && jogadas.contains(4) && jogadas.contains(6)));
     }
 
     private static boolean verificaJogadaFeita(int jogada){
