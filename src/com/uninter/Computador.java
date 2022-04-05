@@ -6,6 +6,7 @@ public class Computador {
 
     public HashSet<Integer> jogadas = new HashSet<>();
 
+    // este método varia conforme a classe em que é implementado
     public int gerarJogada(){ return -1; }
 
     public void jogar(int casa){
