@@ -29,10 +29,11 @@ public class Tabuleiro {
 
             if (jogadaUsuario >= 0 && jogadaUsuario <= 8){
 
-                if (!verificaJogadaFeita(jogadaUsuario)){
+                if (verificaJogadaFeita(jogadaUsuario)){
 
                     usuario.addJogada(jogadaUsuario);
                     jogadasFeitas.add(jogadaUsuario);
+                    System.out.println("Usuário jogou " + usuario.getJogadas());
                     if (verificarVitoria(usuario.getJogadas())){
                         System.out.println("Usuário venceu!");
                         break;
@@ -54,14 +55,14 @@ public class Tabuleiro {
 
             int jogadaPC;
             while (true){
-                jogadaPC = computador.jogar();
-                if (!verificaJogadaFeita(jogadaPC)) {
+                jogadaPC = computador.gerarJogada();
+                if (verificaJogadaFeita(jogadaPC)) {
+                    computador.jogar(jogadaPC);
                     jogadasFeitas.add(jogadaPC);
                     break;
                 }
             }
-            System.out.println("Computador jogou " + jogadaPC);
-            System.out.println(computador.getJogadas());
+            System.out.println("Computador jogou " + computador.getJogadas());
 
             if (verificarVitoria(computador.getJogadas())){
                 System.out.println("Computador venceu!");
@@ -82,6 +83,6 @@ public class Tabuleiro {
     }
 
     private static boolean verificaJogadaFeita(int jogada){
-        return jogadasFeitas.contains(jogada);
+        return !jogadasFeitas.contains(jogada);
     }
 }

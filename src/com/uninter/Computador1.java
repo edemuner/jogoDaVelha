@@ -5,11 +5,10 @@ import java.util.Random;
 public class Computador1 extends Computador{
 
 
-    public int jogar(){
+    public int gerarJogada(){
         Random rand = new Random();
 
         int jogada = rand.nextInt(9);
-        this.jogadas.add(jogada);
         return jogada;
 
     }
