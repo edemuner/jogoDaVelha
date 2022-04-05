@@ -2,6 +2,12 @@ package com.uninter;
 
 import java.util.Scanner;
 
+// mudança de projeto para acabar com a classe jogador
+// pois a unificação do método jogar em jogador não dá certo
+// pq os métodos jogar dentro de usuário e dentro de computador(es) são visceralmente diferentes
+// jogar de usuário parâmetro, pq o valor a ser armazenado vem de fora, já é conhecido da classe de cima, e não precisa ser retornado
+// jogar de computador não recebe parâmetro, o valor é gerado dentro da classe, ele precisa retornar esse valor, que é desconhecido da classe de cima
+
 public class Main {
 
     public static void main(String[] args) {

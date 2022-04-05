@@ -1,18 +1,23 @@
 package com.uninter;
 
-import java.util.Scanner;
+import java.util.HashSet;
 
-public class Usuario extends Jogador{
+public class Usuario {
 
-    Scanner scan = new Scanner(System.in);
+    private HashSet<Integer> jogadas = new HashSet<>();
 
-    public int jogar(){
+    public void addJogada(int casa){
+        jogadas.add(casa);
+    }
+
+    public HashSet<Integer> getJogadas() {
+        return jogadas;
+    }
+
+    public void jogar(int jogada){
 
         boolean done = false;
-        int jogada = -1;
         while(!done) {
-            System.out.println("Digite sua jogada: ");
-            jogada = Integer.parseInt(scan.nextLine());
             if (jogada >= 0 && jogada <= 8){
                 this.addJogada(jogada);
                 done = true;
@@ -21,6 +26,5 @@ public class Usuario extends Jogador{
                 System.out.println("----------------------");
             }
         }
-        return jogada;
     }
 }

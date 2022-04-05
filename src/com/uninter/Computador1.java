@@ -2,15 +2,14 @@ package com.uninter;
 
 import java.util.Random;
 
-public class Computador1 extends Jogador{
+public class Computador1 extends Computador{
 
 
     public int jogar(){
         Random rand = new Random();
 
         int jogada = rand.nextInt(9);
-        this.addJogada(jogada);
-        System.out.println("O computador jogou " + jogada);
+        this.jogadas.add(jogada);
         return jogada;
 
     }

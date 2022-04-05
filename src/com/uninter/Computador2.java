@@ -1,4 +1,4 @@
 package com.uninter;
 
-public class Computador2 extends Jogador{
+public class Computador2 extends Computador{
 }

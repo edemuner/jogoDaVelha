@@ -2,8 +2,11 @@ package com.uninter;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Scanner;
 
 public class Tabuleiro {
+
+    static Scanner scan = new Scanner(System.in);
 
     static ArrayList<Integer> jogadasFeitas = new ArrayList<>();
 
@@ -13,7 +16,7 @@ public class Tabuleiro {
 
         Usuario usuario = new Usuario();
 
-        Jogador computador = level == 1 ?
+        Computador computador = level == 1 ?
                                 new Computador1() :
                             level == 2 ?
                                 new Computador2() :
@@ -21,41 +24,48 @@ public class Tabuleiro {
                                 new Computador3();
 
         while(true) {
+            System.out.println("Digite sua jogada: ");
+            int jogadaUsuario = Integer.parseInt(scan.nextLine());
 
-            if (movimento(usuario) == 0) break;
+            if (jogadaUsuario >= 0 && jogadaUsuario <= 8){
+
+                if (!verificaJogadaFeita(jogadaUsuario)){
+
+                    usuario.addJogada(jogadaUsuario);
+                    jogadasFeitas.add(jogadaUsuario);
+                    if (verificarVitoria(usuario.getJogadas())){
+                        System.out.println("Usuário venceu!");
+                        break;
+                    }
+                } else {
+                    System.out.println("Essa casa já foi jogada");
+                    continue;
+                }
+            } else {
+                System.out.println("O número deve ser entre 0 e 8");
+                continue;
+            }
+
+
             if (jogadasFeitas.size() == 9){
                 System.out.println("Empate!");
                 break;
             }
-            if (movimento(computador) == 0) break;
 
-        }
-    }
-
-    private static int movimento(Jogador jogador){
-
-        boolean jogadaValida = false;
-        while(!jogadaValida){
-            int jogada = jogador.jogar();
-            if (verificaJogadaFeita(jogada)){
-                System.out.println("Essa casa já foi jogada!");
-            } else {
-                jogadaValida = true;
-                jogadasFeitas.add(jogada);
+            int jogadaPC;
+            while (true){
+                jogadaPC = computador.jogar();
+                if (!verificaJogadaFeita(jogadaPC)) break;
+            }
+            System.out.println("Computador jogou " + jogadaPC);
+            if (verificarVitoria(computador.getJogadas())){
+                System.out.println("Computador venceu!");
+                break;
             }
         }
-
-        if (verificarVitoria(jogador)) {
-            System.out.println("Usuário ganhou");
-            return 0;
-        }
-        return 1;
     }
 
-
-    private static boolean verificarVitoria(Jogador jogador){
-        System.out.println(jogador.getJogadas());
-        HashSet<Integer> jogadas = jogador.getJogadas();
+    private static boolean verificarVitoria(HashSet<Integer> jogadas){
         return (jogadas.contains(0) && jogadas.contains(1) && jogadas.contains(2) ||
                 jogadas.contains(3) && jogadas.contains(4) && jogadas.contains(5) ||
                 jogadas.contains(6) && jogadas.contains(7) && jogadas.contains(8) ||
