@@ -2,7 +2,6 @@ package com.uninter;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Scanner;
 
 public class Tabuleiro {
 
@@ -10,6 +9,9 @@ public class Tabuleiro {
     static ArrayList<Integer> jogadasFeitas = new ArrayList<>();
 
     static void iniciarJogo(int level){
+
+        // limpeza da lista para não confundir com jogos anteriores
+        jogadasFeitas.clear();
 
         Usuario usuario = new Usuario();
 
@@ -24,37 +26,9 @@ public class Tabuleiro {
 
         // o laço principal desse método
         // contém duas jogadas, uma do usuário e outra do computador
-        // o método ficou um pouco longo, provavelmente ficaria melhor sendo um método pra cada jogador
         while(true) {
 
-            // esse método obtem um int através de um input do usuário
-            int jogadaUsuario = usuario.obterJogada();
-
-            //validação de que se trata de um número pertencente ao tabuleiro
-            if (jogadaUsuario >= 0 && jogadaUsuario <= 8){
-
-                // validação se a jogada é repetida, não é possível jogar 2x na mesma casa
-                if (verificaJogadaFeita(jogadaUsuario)){
-
-                    // tudo validado, a jogada é adicionada na lista do tabuleiro e na lista do jogador
-                    usuario.addJogada(jogadaUsuario);
-                    jogadasFeitas.add(jogadaUsuario);
-                    System.out.println("Usuário jogou " + usuario.getJogadas());
-
-                    // logo após a jogada, é verificado se essa jogada levou o usuário à vitória, se sim o laço encerra
-                    if (verificarVitoria(usuario.getJogadas())){
-                        System.out.println("Usuário venceu!");
-                        break;
-                    }
-                } else {
-                    System.out.println("Essa casa já foi jogada");
-                    continue;
-                }
-            } else {
-                System.out.println("O número deve ser entre 0 e 8");
-                continue;
-            }
-
+            if (jogadaHumana(usuario)) break;
 
             // o empate sempre acontece se em 9 jogadas ninguém ganhar
             // o momento adequado para verificar se o jogo empatou é entre o par de jogadas
@@ -65,32 +39,73 @@ public class Tabuleiro {
                 break;
             }
 
-            int jogadaPC;
+            if (jogadaComputador(computador)) break;
 
-            // na jogada do computador, mais um laço while é necessário
-            // pois os métodos de geração do valor são internos às classes filhas de Computador, e são aleatórios
-            // então é preciso se certificar que o valor não foi jogado ainda, algumas iterações são feitas até achar um valor válido
-            while (true){
+        }
+    }
 
-                // é chamado um método de computador que gera um valor para ser jogado
-                // esse valor varia conforme o nível de computador, cf. implementação das classes filhas
-                jogadaPC = computador.gerarJogada();
-                if (verificaJogadaFeita(jogadaPC)) {
+    private static boolean jogadaComputador(Computador computador){
+        int jogadaPC;
 
-                    // o valor é validado, se estiver tudo certo é adicionado nas listas
-                    computador.jogar(jogadaPC);
-                    jogadasFeitas.add(jogadaPC);
-                    break;
-                }
-            }
-            System.out.println("Computador jogou " + computador.getJogadas());
+        // na jogada do computador, mais um laço while é necessário
+        // pois os métodos de geração do valor são internos às classes filhas de Computador, e são aleatórios
+        // então é preciso se certificar que o valor não foi jogado ainda, algumas iterações são feitas até achar um valor válido
+        while (true){
 
-            // ao fim da jogada do computador, verifica-se se foi vencedor
-            if (verificarVitoria(computador.getJogadas())){
-                System.out.println("Computador venceu!");
+            // é chamado um método de computador que gera um valor para ser jogado
+            // esse valor varia conforme o nível de computador, cf. implementação das classes filhas
+            jogadaPC = computador.gerarJogada();
+            if (verificaJogadaFeita(jogadaPC)) {
+
+                // o valor é validado, se estiver tudo certo é adicionado nas listas
+                computador.jogar(jogadaPC);
+                jogadasFeitas.add(jogadaPC);
                 break;
             }
         }
+        System.out.println("Computador jogou " + computador.getJogadas());
+
+        // ao fim da jogada do computador, verifica-se se foi vencedor
+        if (verificarVitoria(computador.getJogadas())){
+            System.out.println("Computador venceu!");
+            return true;
+        }
+
+        return false;
+    }
+
+    private static boolean jogadaHumana(Usuario usuario){
+
+        // esse método obtem um int através de um input do usuário
+        int jogadaUsuario = usuario.obterJogada();
+
+        //validação de que se trata de um número pertencente ao tabuleiro
+        if (jogadaUsuario >= 0 && jogadaUsuario <= 8){
+
+            // validação se a jogada é repetida, não é possível jogar 2x na mesma casa
+            if (verificaJogadaFeita(jogadaUsuario)){
+
+                // tudo validado, a jogada é adicionada na lista do tabuleiro e na lista do jogador
+                usuario.addJogada(jogadaUsuario);
+                jogadasFeitas.add(jogadaUsuario);
+                System.out.println("Usuário jogou " + usuario.getJogadas());
+
+                // logo após a jogada, é verificado se essa jogada levou o usuário à vitória, se sim o laço encerra
+                if (verificarVitoria(usuario.getJogadas())){
+                    System.out.println("Usuário venceu!");
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                System.out.println("Essa casa já foi jogada");
+                return false;
+            }
+        } else {
+            System.out.println("O número deve ser entre 0 e 8");
+            return false;
+        }
+
     }
 
     // aqui está a lógica que verifica se um set de jogadas é vencedor

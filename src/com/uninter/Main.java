@@ -2,6 +2,14 @@ package com.uninter;
 
 import java.util.Scanner;
 
+/*
+Feito por Eduardo Demuner
+
+https://www.linkedin.com/in/eduardo-demuner-49a67a69/
+https://github.com/edemuner
+
+ */
+
 
 public class Main {
 
@@ -23,6 +31,12 @@ public class Main {
 
                 if (escolha >= 1 && escolha <= 3) {
                     Tabuleiro.iniciarJogo(escolha);
+
+                    System.out.println("-----------------");
+                    System.out.println("Deseja jogar novamente? y/n");
+                    String novoJogo = scan.nextLine();
+                    if (!novoJogo.equalsIgnoreCase("y")) break;
+
                 } else {
                     System.out.println("O level deve ser entre 1 e 3");
                 }
@@ -30,10 +44,6 @@ public class Main {
                 System.out.println("Apenas números, de 1 até 3");
             }
 
-            System.out.println("-----------------");
-            System.out.println("Deseja jogar novamente? y/n");
-            String novoJogo = scan.nextLine();
-            if (!novoJogo.equalsIgnoreCase("y")) break;
         }
 
 
