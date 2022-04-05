@@ -15,13 +15,15 @@ Também se encerra se todas as casas estiverem ocupadas, mesmo que nenhum dos jo
 Encerrado o jogo, o resultado é informado e o usuário é questionado se quer jogar novamente
 
 
-VALIDAÇÕES
+FLUXOS ALTERNATIVOS - VALIDAÇÕES
 
-O usuário deve informar um nível de 1 a 3, senão será solicitado para digitar novamente
+O usuário deve informar um nível de 1 a 3, senão será solicitado para digitar novamente, caso digite outro intervalo numérico
 
-Nas suas jogadas, o usuário deve informar uma casa que ainda não foi utilizada
+Nas suas jogadas, o usuário deve informar uma casa que ainda não foi utilizada, caso contrário, será solicitado para informar novamente
 
-Deve haver validações para números fora do intervalo permitido (1-9) e para valores não numéricos
+Deve haver validações para números fora do intervalo permitido (1-9) e para valores não numéricos, a informação será solicitada novamente
+
+Há uma validação na jogada do computador, que é gerada de forma aleatória, mas não se trata propriamente de validação, e sim de tentativas iterativas.
 
 
 OUTROS REQUISITOS

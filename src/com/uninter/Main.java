@@ -3,11 +3,13 @@ package com.uninter;
 import java.util.Scanner;
 
 /*
+
 Feito por Eduardo Demuner
 
-https://www.linkedin.com/in/eduardo-demuner-49a67a69/
+https://www.linkedin.com/in/eduardo-demuner-49a67a69/ - disponível para oportunidade de estágio ou dev jr ;)
 https://github.com/edemuner
 
+Programa testado em todos os casos de uso descritos no arquivo Casos de uso
  */
 
 

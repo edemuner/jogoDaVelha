@@ -28,8 +28,20 @@ public class Tabuleiro {
         // contém duas jogadas, uma do usuário e outra do computador
         while(true) {
 
-            if (jogadaHumana(usuario)) break;
-
+            // retorno -1 = falha na validação, nova tentativa
+            // retorno 1 = vitória do usuário, fim do laço
+            // retorno 0 = o jogo apenas prossegue
+            try {
+                int jogada = jogadaHumana(usuario);
+                if (jogada == -1){
+                    continue;
+                } else if (jogada == 1){
+                    break;
+                }
+            } catch(NumberFormatException erro){
+                System.out.println("Apenas números de casas são jogadas válidas");
+                continue;
+        }
             // o empate sempre acontece se em 9 jogadas ninguém ganhar
             // o momento adequado para verificar se o jogo empatou é entre o par de jogadas
             // após uma jogada do usuário o número de jogadas sempre será ímpar
@@ -74,9 +86,10 @@ public class Tabuleiro {
         return false;
     }
 
-    private static boolean jogadaHumana(Usuario usuario){
+    private static int jogadaHumana(Usuario usuario){
 
         // esse método obtem um int através de um input do usuário
+
         int jogadaUsuario = usuario.obterJogada();
 
         //validação de que se trata de um número pertencente ao tabuleiro
@@ -93,17 +106,17 @@ public class Tabuleiro {
                 // logo após a jogada, é verificado se essa jogada levou o usuário à vitória, se sim o laço encerra
                 if (verificarVitoria(usuario.getJogadas())){
                     System.out.println("Usuário venceu!");
-                    return true;
+                    return 1;
                 } else {
-                    return false;
+                    return 0;
                 }
             } else {
                 System.out.println("Essa casa já foi jogada");
-                return false;
+                return -1;
             }
         } else {
             System.out.println("O número deve ser entre 0 e 8");
-            return false;
+            return -1;
         }
 
     }

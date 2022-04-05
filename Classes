@@ -1,24 +1,24 @@
 CLASSES
 
 -Main
-	Vai iniciar a execução do programa e buscar do usuário o nível com o qual ele deseja 	jogar
+	Vai iniciar a execução do programa e buscar do usuário o nível com o qual ele deseja jogar
 	Vai importar a classe Tabuleiro e passar o nível recebido
 	Vai chamar o método iniciarJogo de Tabuleiro
+	Vai comandar o loop raiz do jogo, que controla a sucessão de partidas
 
 
 -Tabuleiro
 	Vai ter o método iniciarJogo
 		Esse método irá instanciar um Usuário e Um Computador no nível informado
-		Será feita uma variável de controle para verificar se já foram realizadas 9 			jogadas (case de fim de jogo com empate)
+		Será feita um arrayList para conter as jogadas realizadas
+		Quando tiver inserções ítens sem vitória de alguém, o jogo estará empatado
 		Será chamado um método jogar de cada uma das classes que estão jogando
 		Apos cada jogada, deve ser feita a verificação se o jogador venceu
 		
--Jogador
-	Classe mãe, terá um array de jogadas
 
 -Usuario
-	Herda de jogador, terá um método jogar, que recebe um input do usuário e faz a 		validação, depois registra no array
+	Terá um método jogar, que recebe um input do usuário, envia para validação em Tabuleiro, depois registra no array
 
 
 -Computador
-	Deve ser feitas 3 classes herdando de Jogador, cada uma contendo um método diferente de 		escolha da casa a jogar
+	Classe mãe, tem 3 filhas, cada uma contendo um método diferente de escolha da casa a jogar
