@@ -57,7 +57,7 @@ public class Tabuleiro {
     }
 
     private static boolean jogadaComputador(Computador computador){
-        int jogadaPC;
+
 
         // na jogada do computador, mais um laço while é necessário
         // pois os métodos de geração do valor são internos às classes filhas de Computador, e são aleatórios
@@ -66,7 +66,7 @@ public class Tabuleiro {
 
             // é chamado um método de computador que gera um valor para ser jogado
             // esse valor varia conforme o nível de computador, cf. implementação das classes filhas
-            jogadaPC = computador.gerarJogada();
+            int jogadaPC = computador.gerarJogada();
             if (verificaJogadaFeita(jogadaPC)) {
 
                 // o valor é validado, se estiver tudo certo é adicionado nas listas
